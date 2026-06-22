@@ -1,11 +1,33 @@
+# Build outputs
 target/
 *.class
 
+# Eclipse
 .settings/
 .project
 .classpath
+
+# IntelliJ IDEA
 .idea/
 *.iml
+
+# NetBeans
 .nb-configuration.xml
 
+# VS Code
+.vscode/
+
+# Log files
 *.log
+
+# Database & Secret Configs
+*.env
+local.properties
+
+# Operating System Junk
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Misc
+todo.md

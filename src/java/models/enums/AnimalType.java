@@ -1,4 +1,4 @@
-package noncontroller.enums;
+package models.enums;
 
 public enum AnimalType {
     INVALID("Invalid", "Tidak Valid"),

@@ -1,14 +1,14 @@
-package noncontroller.enums;
+package models.enums;
 
-public enum GenderTable {
+public enum SeedType {
     INV("Invalid"),
-    MALE("Male"),
-    FEMALE("Female");
+    MONOCOTS("Monocotyledon"),
+    DICOTS("Dicotyledons");
 
     private final String label;
 
     // Constructor
-    private GenderTable(String label) {
+    private SeedType(String label) {
         this.label = label;
     }
 

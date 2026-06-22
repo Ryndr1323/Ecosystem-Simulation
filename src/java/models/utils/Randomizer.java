@@ -1,9 +1,8 @@
-package noncontroller.utils;
+package models.utils;
 
 // Importer
 import java.util.Random;
-
-import noncontroller.enums.GenderTable;
+import models.enums.GenderTable;
 
 public class Randomizer {
     private static final Random rand = new Random();
@@ -19,8 +18,8 @@ public class Randomizer {
     }
 
     // Randomizer of Gender
-    private static final GenderTable[] GenderSlot = {GenderTable.MALE, GenderTable.FEMALE}; 
+    private static final GenderTable[] GENDER_SLOT = {GenderTable.MALE, GenderTable.FEMALE}; 
     public static GenderTable getRandomGender() {
-        return GenderSlot[rand.nextInt(0, GenderSlot.length)];
+        return GENDER_SLOT[rand.nextInt(0, GENDER_SLOT.length)];
     }
 }
