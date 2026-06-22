@@ -25,7 +25,7 @@ public class AnimalDescriptor {
     private final double maxAge;
 
     // Attachment Address
-    private final String imgAddr;
+    private final String img_addr;
 
     // Constructors
     public AnimalDescriptor(ResultSet rs) throws SQLException {
@@ -38,17 +38,19 @@ public class AnimalDescriptor {
         this.ageMating = rs.getDouble("age_mating");
         this.maxAge = rs.getDouble("max_age");
 
-        this.imgAddr = rs.getString("img_addr");
+        this.img_addr = rs.getString("img_addr");
     }
 
     // Setters and Getters
     public String getBreedName() { return this.breedName; }
     public String getWikiDescription() { return this.mainDescription; }
     public String getAnimalType() { return this.animalType; }
+    public Double getMaxAge() { return this.maxAge; }
+    public String getImgAddr() { return this.img_addr; }
 
     // Methods
     public void injectSimulatedData(Animal animalData) {
-        animalData.setBreedKey(breedName.toLowerCase());
+        animalData.setEntityName(breedName);
         animalData.setBaseSpeed(speedValue);
         animalData.setChaseMultiplier(chaseMult);
         animalData.setMatingAge(ageMating);
@@ -60,10 +62,5 @@ public class AnimalDescriptor {
         } catch (IllegalArgumentException | NullPointerException e) {
             animalData.setAnimalType(AnimalType.INVALID); 
         }
-    }
-
-    public void retrieveMainWikiData(Animal animalData) {
-        // TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'retrieveMainWikiData'");
     }
 }

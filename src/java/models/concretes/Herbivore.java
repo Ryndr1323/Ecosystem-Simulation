@@ -153,7 +153,7 @@ public class Herbivore extends Animal {
              */
             if (newPartner != null && newPartner instanceof Herbivore && newPartner.getClass() == this.getClass() && newPartner.isAlive()) {
                 Herbivore newDowncast = (Herbivore) newPartner;
-                if ((newDowncast.getBreedKey().equals(this.getBreedKey())) && (newDowncast.getGenderTable() != this.getGenderTable())) {
+                if ((newDowncast.getEntityName().equals(this.getEntityName())) && (newDowncast.getGenderTable() != this.getGenderTable())) {
                     this.setMatingLock(newDowncast);
                     newDowncast.setMatingLock(this);
                 }

@@ -161,7 +161,7 @@ public class Carnivore extends Animal {
              */
             if (newPartner != null && newPartner instanceof Carnivore && newPartner.getClass() == this.getClass() && newPartner.isAlive()) {
                 Carnivore newDowncast = (Carnivore) newPartner;
-                if ((newDowncast.getBreedKey().equals(this.getBreedKey())) && (newDowncast.getGenderTable() != this.getGenderTable())) {
+                if ((newDowncast.getEntityName().equals(this.getEntityName())) && (newDowncast.getGenderTable() != this.getGenderTable())) {
                     this.setMatingLock(newDowncast);
                     newDowncast.setMatingLock(this);
                 }

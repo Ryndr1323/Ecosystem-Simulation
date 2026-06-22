@@ -10,6 +10,7 @@ public abstract class Entity implements ISimulationConfig {
     private static final double BASE_INIT_VALUE = 0.0;
 
     // Class Data
+    private String entityName;
     private final int entityID;
     protected boolean isAlive;
     protected double posX, posY;
@@ -26,6 +27,12 @@ public abstract class Entity implements ISimulationConfig {
     }
     
     // Setters and Getters
+    // Name
+    public void setEntityName(String nameValue) {
+        this.entityName = nameValue;
+    }
+    public String getEntityName() { return this.entityName; }
+
     // Soul Related
     public void die() {
         this.isAlive = false;

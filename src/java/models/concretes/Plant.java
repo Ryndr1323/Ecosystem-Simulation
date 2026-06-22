@@ -1,7 +1,9 @@
 package models.concretes;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
+
 import models.abstracts.Entity;
 import models.descriptor.PlantDescriptor;
 import models.enums.SeedType;
@@ -25,7 +27,7 @@ public class Plant extends Entity {
     // Asexual Cloning Related
     private int asexualAttempt = 0;
     private boolean canReproduce = false;
-    private final List<Plant> sproutQueue = new ArrayList<>();
+    private final Queue<Plant> sproutQueue = new LinkedList<>();
     
     // Bridge
     private final PlantDescriptor loaderRef;
@@ -101,7 +103,7 @@ public class Plant extends Entity {
     }
 
     public void addSproutQueue(Plant newSeed) {
-        this.sproutQueue.add(newSeed);
+        this.sproutQueue.offer(newSeed);
     }
 
     public void cleanupSproutQueue() {

@@ -11,13 +11,14 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import models.utils.DataPool;
 
 /**
  *
  * @author USER
  */
-@WebServlet(name = "emitdata", urlPatterns = {"/emitdata"})
-public class MasterDataController extends HttpServlet {
+@WebServlet(name = "SimulatorRenderer", urlPatterns = {"/SimulatorRenderer"})
+public class SimulatorRendererServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,13 +37,64 @@ public class MasterDataController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet emitdata</title>");
+            out.println("<title>Servlet SimulatorRenderer</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet emitdata at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet SimulatorRenderer at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
+    }
+    
+    private static final long serialVersionUID = 1L;
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+            throws ServletException, IOException {
+        
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        response.setHeader("Access-Control-Allow-Origin", "*"); 
+
+        PrintWriter out = response.getWriter();
+
+        var herbivores = DataPool.getCachedHerbivoreData();
+        var carnivores = DataPool.getCachedCarnivoreData();
+        var plants = DataPool.getCachedPlantData();
+
+        StringBuilder json = new StringBuilder();
+        json.append("{");
+        json.append("\"herbivores\": [");
+        for (int i = 0; i < herbivores.size(); i++) {
+            json.append("{");
+            json.append("\"name\":\"").append(herbivores.get(i).getBreedName()).append("\"");
+            json.append("}");
+            if (i < herbivores.size() - 1) json.append(",");
+        }
+        json.append("],");
+        
+        json.append("{");
+        json.append("\"carnivores\": [");
+        for (int i = 0; i < herbivores.size(); i++) {
+            json.append("{");
+            json.append("\"name\":\"").append(carnivores.get(i).getBreedName()).append("\"");
+            json.append("}");
+            if (i < herbivores.size() - 1) json.append(",");
+        }
+        json.append("],");
+
+        json.append("\"plants\": [");
+        for (int i = 0; i < plants.size(); i++) {
+            json.append("{");
+            json.append("\"name\":\"").append(plants.get(i).getBotanicName()).append("\"");
+            json.append("}");
+            if (i < plants.size() - 1) json.append(",");
+        }
+        json.append("]");
+        json.append("}");
+
+        out.print(json.toString());
+        out.flush();
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

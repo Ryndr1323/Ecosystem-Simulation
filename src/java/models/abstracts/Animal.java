@@ -1,7 +1,8 @@
 package models.abstracts;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 import models.descriptor.AnimalDescriptor;
 import models.enums.AnimalType;
 import models.enums.GenderTable;
@@ -11,13 +12,11 @@ import models.utils.Randomizer;
 public abstract class Animal extends Entity implements IAnimalInteract {
     // Fields
     // Static Values
-    private static final String KEY_DEF_INIT = "unknown";
     private static final double ENERGY_INIT_VALUE = 100;
     private static final double ENERGY_BREED_MIN = 70.0;
     private static final double BASE_INIT_VALUE = 0.0;
 
     // Breeds
-    private String breedKey = KEY_DEF_INIT;
     private final GenderTable genderType = Randomizer.getRandomGender();
     private AnimalType animalType;
 
@@ -36,7 +35,7 @@ public abstract class Animal extends Entity implements IAnimalInteract {
     private Animal mateLock = null;
     private double amountMated = 0;
     private final double MATING_CAP = 1;
-    private final List<Animal> spawnQueue = new ArrayList<>();
+    private final Queue<Animal> spawnQueue = new LinkedList<>();
 
     // Food Related
     private Entity targetLock = null;
@@ -62,11 +61,6 @@ public abstract class Animal extends Entity implements IAnimalInteract {
     public AnimalDescriptor getAnimalDescriptor() { return this.loaderRef; }
 
     // Breeds
-    public void setBreedKey(String newName) {
-        this.breedKey = newName;
-    }
-    public String getBreedKey() { return this.breedKey; }
-
     public GenderTable getGenderTable() {
         return this.genderType;
     }
@@ -200,7 +194,7 @@ public abstract class Animal extends Entity implements IAnimalInteract {
     }
 
     public void addSpawnQueue(Animal newborn) {
-        this.spawnQueue.add(newborn);
+        this.spawnQueue.offer(newborn);
     }
 
     public void cleanupSpawnQueue() {

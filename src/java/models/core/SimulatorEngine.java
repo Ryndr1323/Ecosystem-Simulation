@@ -45,13 +45,13 @@ public class SimulatorEngine {
     // Methods
     // Helpers
     private boolean checkEligibilityRun() {
-        // Scenario 1 - Only Herbs Exists
-        if ((herbivoreCounter == 0) && (carnivoreCounter == 0)) {
+        // Scenario 1 - All Died
+        if ((herbivoreCounter == 0) && (carnivoreCounter == 0) && (plantCounter == 0)) {
             return false;
         }
 
-        // Scenario 2 - All Died
-        if ((herbivoreCounter == 0) && (carnivoreCounter == 0) && (plantCounter == 0)) {
+        // Scenario 1 - Only Herbs Exists
+        if (plantCounter == HARDCAP_POPULATION) {
             return false;
         }
 
@@ -89,6 +89,10 @@ public class SimulatorEngine {
                 }
 
                 entity.checkEntityAging();
+                if (!entity.isAlive()) {
+                    continue;
+                }
+
                 if (entity instanceof Animal animal) {
                     Entity cachedDataPool = DataPool.getRandomGlobalEntity();
                     Animal cachedDataPool2 = (Animal) DataPool.getAnimalDataRand();
@@ -109,6 +113,10 @@ public class SimulatorEngine {
                 }
                 
                 entity.checkEntityAging();
+                if (!entity.isAlive()) {
+                    continue;
+                }
+                
                 if (entity instanceof Plant plant) {
                     plant.doInteract(plantCounter);
                     if (!plant.isQueueEmpty()) {
@@ -120,12 +128,8 @@ public class SimulatorEngine {
             }
 
             // TODO: Get This Proper Way to Run
-            for (Entity entity : DataPool.getToBeSpawned()) {
-                entity.selfInjectData();
-            }
-
-            DataPool.flushSpawnQueue();
             DataPool.flushDeadEntities();
+            DataPool.beginAddingQueue();
         } else {
             this.isRunning = false;
         }

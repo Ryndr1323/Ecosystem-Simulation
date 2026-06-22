@@ -2,7 +2,6 @@ package models.descriptor;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import models.concretes.Plant;
 import models.enums.SeedType;
 import models.utils.Randomizer;
@@ -24,7 +23,7 @@ public class PlantDescriptor {
     private final double maxAge;
 
     // Attachment Address
-    private final String imgAddr;
+    private final String img_addr;
 
     // Constructors
     public PlantDescriptor(ResultSet rs) throws SQLException {
@@ -36,16 +35,20 @@ public class PlantDescriptor {
         this.ageSeedMature = rs.getDouble("min_age");
         this.maxAge = rs.getDouble("max_age");
 
-        this.imgAddr = rs.getString("img_addr");
+        this.img_addr = rs.getString("img_addr");
     }
 
     // Setters and Getters
     public String getBotanicName() { return this.botanicName; }
     public String getWikiDescription() {return this.mainDescription; }
     public String getSeedlingType() { return this.seedType; }
+    public Double getMaxAge() { return this.maxAge; }
+    public String getImgAddr() { return this.img_addr; }
+
 
     // Methods
     public void injectSimulatedData(Plant plantData) {
+        plantData.setEntityName(botanicName);
         plantData.setMaturingAge(ageSeedMature);
         plantData.setMaxAge(maxAge * Randomizer.getRandomDouble(MULT_BOT_CEIL, MULT_TOP_CEIL));
         plantData.setPoisonValue(isPoisonous);
